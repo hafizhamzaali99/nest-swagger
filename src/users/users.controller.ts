@@ -15,7 +15,7 @@ export class UsersController {
     @ApiNotFoundResponse()
     @Get()
     getAllUsers(@Query('name') name:string): User[]{
-        const user = this.userService.findAll(name)
+        const user = this.userService.findAll(name)  // findAll return array and if no user so return empty array and empty array is also true so it will not go to exception error but empty object is false
         if(!user.length){
             throw new NotFoundException()
         }
@@ -23,12 +23,12 @@ export class UsersController {
     }
     
     @ApiOkResponse({type:User})
-    @ApiNotFoundResponse()
+    @ApiNotFoundResponse() // use this for documented
     @Get(':id')
     getUserById(@Param('id') id:string ) :User{
         const user =  this.userService.findByID(parseInt(id))
         if(!user){
-            throw new NotFoundException()
+            throw new NotFoundException() //just give not found response but it is not documented
         }
         return user
     }
