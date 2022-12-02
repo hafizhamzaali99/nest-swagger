@@ -8,7 +8,7 @@ export class UsersService {
 
     findAll(name?:string) : User[] {
         if(name){
-            return this.users.filter(user=>user.name === name)
+            return this.users.filter(user=>user.name.toLocaleLowerCase() === name.toLocaleLowerCase())  //converting both property to lowercase to match the property
         }
         return this.users
     }
